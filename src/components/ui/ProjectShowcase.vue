@@ -87,7 +87,7 @@ const handleMouseLeave = () => {
 
 <template>
   <section ref="containerRef" @mousemove="handleMouseMove" class="relative w-full max-w-2xl mx-auto px-6 py-16">
-    <h2 class="text-muted-foreground text-sm font-medium tracking-wide uppercase mb-8">Selected Work</h2>
+    <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 tracking-tight text-white/90">Selected Work</h2>
 
     <div
       class="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl transition-[opacity,transform] duration-300 ease-out"
@@ -132,7 +132,7 @@ const handleMouseLeave = () => {
           <div class="relative flex items-start justify-between gap-4">
             <div class="flex-1 min-w-0">
               <div class="inline-flex items-center gap-2">
-                <h3 class="text-foreground font-medium text-lg tracking-tight">
+                <h3 class="text-foreground font-bold text-2xl tracking-tight">
                   <span class="relative">
                     {{ project.title }}
                     <span
@@ -148,7 +148,7 @@ const handleMouseLeave = () => {
               </div>
 
               <p
-                class="text-sm mt-1 leading-relaxed transition-all duration-300 ease-out"
+                class="text-sm md:text-xl lg:text-xl font-regular tracking-tight mt-2 leading-relaxed transition-all duration-300 ease-out"
                 :class="hoveredIndex === index ? 'text-foreground/70' : 'text-muted-foreground'"
               >
                 {{ project.description }}

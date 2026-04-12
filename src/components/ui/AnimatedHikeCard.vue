@@ -66,7 +66,7 @@ const props = defineProps({
         </div>
       </div>
 
-      <p class="text-sm leading-relaxed text-muted-foreground">
+      <p class="text-sm md:text-xl lg:text-xl font-regular tracking-tight leading-relaxed text-muted-foreground">
         {{ description }}
       </p>
     </div>
