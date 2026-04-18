@@ -56,10 +56,10 @@ onUnmounted(() => {
     <main class="relative z-10 w-full flex flex-col items-center">
       <!-- Minimalist Dark Hero Section -->
       <section class="relative w-full h-screen bg-black flex flex-col items-center justify-center overflow-hidden">
-        
         <h1 class="md:text-4xl text-4xl lg:text-5xl font-bold tracking-tight text-center text-white relative z-20 mix-blend-lighten py-2">
-          Call me Ahmad
+            Ahmad
         </h1>
+        <span class="text-gray-500 md:text-xl text-md">Technical Business Analayst and Software Engineer</span>
         
         <div class="w-[40rem] h-40 relative flex flex-col items-center">
           <!-- Horizontal Glow Lines -->
@@ -85,7 +85,7 @@ onUnmounted(() => {
           <!-- Typewriter Placement Below the horizontal line -->
           <div class="absolute top-12 z-20 w-full text-center text-lg md:text-2xl font-light text-cyan-100">
             <Typewriter
-              :text="['Engineering the future', 'Pixel exact precision', 'Next-generation web']"
+              :text="['Vibe created by our mood', 'Great Vision comes from outside', 'Break loop for decline cath']"
               :speed="70"
               :waitTime="2500"
               :deleteSpeed="30"
@@ -100,8 +100,8 @@ onUnmounted(() => {
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center">
           <!-- Left Site: Orbiting Skills -->
           <div class="flex flex-col items-center order-2 lg:order-1">
-            <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 tracking-tight text-white/90">Our Core Stack</h2>
-            <OrbitingSkills />
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 tracking-tight text-white/90">My Core Stack</h2>
+            <OrbitingSkills />  
           </div>
 
           <!-- Right Side: Business Analyst Magic Text -->
@@ -112,7 +112,7 @@ onUnmounted(() => {
       </section>
 
       <!-- Projects Section -->
-      <div id="projects" class="w-full relative z-20 bg-background/50 backdrop-blur-xl border-t border-white/5 py-12">
+      <div id="works" class="w-full relative z-10 bg-background/50 backdrop-blur-xl border-t border-white/5 py-6">
         <ProjectShowcase />
       </div>
 
@@ -120,19 +120,25 @@ onUnmounted(() => {
       <section id="portfolio" class="w-full relative z-20 py-24 px-6 relative">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/30 pointer-events-none" />
         <div class="max-w-5xl mx-auto">
-          <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 tracking-tight text-white/90">Latest Projects</h2>
+          <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 tracking-tight text-white/90">Recent Projects</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
              <AnimatedHikeCard 
-                title="Booking System"
-                description="Conquer the highest peaks with our guided mountain tours. Stunning vistas await."
+                
+                title="Muslim Travel Booking System"
+                description="A comprehensive booking platform tailored for the Muslim travel industry. It seamlessly connects local travelers with international destinations and exclusive Islamic events like Idul Adha."
+                :images="[
+                  'https://images.unsplash.com/photo-1565552643983-616bb716dc19?q=80&w=2560',
+                  'https://images.unsplash.com/photo-1587595431973-160d0d94add1?q=80&w=2560',
+                  'https://images.unsplash.com/photo-1552084117-56a98a946280?q=80&w=2560'
+                ]"
               />
              <AnimatedHikeCard 
-                title="POS System"
-                description="A serene walk through dense ancient forests, blending nature with inner peace."
+                title="Gold Store POS System"
+                description="An integrated Point of Sale (POS) system designed for gold retail. Featuring a web platform and an Android application for efficient store maintenance, linking customers seamlessly across multiple branches."
                 :images="[
-                  'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560',
-                  'https://images.unsplash.com/photo-1473448928956-c40dced5447f?q=80&w=2560',
-                  'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=2560'
+                  'https://images.unsplash.com/photo-1611085583191-a3b181a88401?q=80&w=2560',
+                  'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=2560',
+                  'https://images.unsplash.com/photo-1573855619003-97b4799dcd8b?q=80&w=2560'
                 ]"
               />
           </div>

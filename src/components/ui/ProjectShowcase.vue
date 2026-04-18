@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive } from 'vue'
 import { ArrowUpRight } from 'lucide-vue-next'
+import handsImg from '../../assets/hands.jpg'
+import FreelanceWorkImg from '../../assets/freelance.jpg'
 
 interface Project {
   title: string
@@ -12,33 +14,19 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Lumina",
-    description: "AI-powered design system generator.",
-    year: "2024",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2670"
+    title: "Technical Business Analysis",
+    description: "Provided remote assistance to clients, ensuring timely resolution of software and hardware concerns Served as an escalation point for challenging technical inquiries, demonstrating expertise in product knowledge and problem-solving abilities. Conducted root cause analysis of technical issues, implementing preventive measures for future occurrences",
+    year: "2022 ~ Now",
+    link: "https://www.hand-global.com/",
+    image: handsImg
   },
   {
-    title: "Flux",
-    description: "Real-time collaboration for creative teams.",
-    year: "2024",
+    title: "Freelance Work",
+    description: "Build and maintenance website for local business. Break down the client's needs, design the website, and implement it. Provide ongoing support and maintenance.",
+    year: "2019 ~ 2022",
     link: "#",
-    image: "https://images.unsplash.com/photo-1530435460869-d13625c69bbf?q=80&w=2670"
+    image: FreelanceWorkImg
   },
-  {
-    title: "Prism",
-    description: "Color palette extraction from any image.",
-    year: "2023",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2670"
-  },
-  {
-    title: "Vertex",
-    description: "3D modeling toolkit for the web.",
-    year: "2023",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2670"
-  }
 ]
 
 const hoveredIndex = ref<number | null>(null)
@@ -86,8 +74,8 @@ const handleMouseLeave = () => {
 </script>
 
 <template>
-  <section ref="containerRef" @mousemove="handleMouseMove" class="relative w-full max-w-2xl mx-auto px-6 py-16">
-    <h2 class="text-3xl md:text-5xl font-bold text-center mb-16 tracking-tight text-white/90">Selected Work</h2>
+  <section ref="containerRef" @mousemove="handleMouseMove" class="relative w-full max-w-5xl mx-auto px-6 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 tracking-tight text-white/90">Work Experience</h2>
 
     <div
       class="pointer-events-none absolute z-50 overflow-hidden rounded-xl shadow-2xl transition-[opacity,transform] duration-300 ease-out"

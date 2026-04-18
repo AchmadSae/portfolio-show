@@ -46,7 +46,7 @@ const getWordOpacity = (index: number) => {
     <span
       v-for="(word, i) in words"
       :key="i"
-      class="relative mt-[10px] mr-[4px] text-sm md:text-xl lg:text-xl font-regular tracking-tight"
+      class="relative mt-[8px] mr-[4px] text-sm md:text-xl lg:text-xl font-regular tracking-tight"
     >
       <span class="absolute opacity-20 text-white">{{ word }}</span>
       <span

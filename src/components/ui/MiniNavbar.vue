@@ -25,11 +25,25 @@ onUnmounted(() => {
 })
 
 const navLinksData = [
-  { label: 'Home', href: '#home' },
-  { label: 'Project', href: '#projects' },
+  { label: 'Home', href: '#' },
+  { label: 'Works', href: '#works' },
   { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Product', href: '#products' },
 ]
+
+const handleNavClick = (e: Event, href: string) => {
+  if (href.startsWith('#')) {
+    e.preventDefault()
+    if (href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    } else {
+      const element = document.querySelector(href)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }
+    isOpen.value = false
+  }
+}
 </script>
 
 <template>
@@ -52,6 +66,7 @@ const navLinksData = [
           v-for="link in navLinksData"
           :key="link.href"
           :href="link.href"
+          @click="(e) => handleNavClick(e, link.href)"
           class="group relative inline-block overflow-hidden h-5 flex items-center text-sm"
         >
           <div class="flex flex-col transition-transform duration-300 ease-out transform group-hover:-translate-y-1/2">
@@ -62,11 +77,10 @@ const navLinksData = [
       </nav>
 
       <div class="hidden sm:flex items-center gap-2 sm:gap-3">
-      
         <div class="relative group w-full sm:w-auto">
           <div class="absolute inset-0 -m-2 rounded-full hidden sm:block bg-gray-100 opacity-40 filter blur-lg pointer-events-none transition-all duration-300 ease-out group-hover:opacity-60 group-hover:blur-xl group-hover:-m-3"></div>
           <button class="relative z-10 px-4 py-1.5 sm:px-3 text-xs sm:text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full hover:from-gray-200 hover:to-gray-400 transition-all duration-200 w-full sm:w-auto">
-           Email Me for Business
+           Email Me
           </button>
         </div>
       </div>
@@ -79,13 +93,13 @@ const navLinksData = [
 
     <div :class="`sm:hidden flex flex-col items-center w-full transition-all ease-in-out duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px] opacity-100 pt-4' : 'max-h-0 opacity-0 pt-0 pointer-events-none'}`">
       <nav class="flex flex-col items-center space-y-4 text-base w-full">
-        <a v-for="link in navLinksData" :key="link.href" :href="link.href" class="text-gray-300 hover:text-white transition-colors w-full text-center">
+        <a v-for="link in navLinksData" :key="link.href" :href="link.href" @click="(e) => handleNavClick(e, link.href)" class="text-gray-300 hover:text-white transition-colors w-full text-center">
           {{ link.label }}
         </a>
       </nav>
       <div class="flex flex-col items-center space-y-4 mt-6 w-full">
         <button class="px-4 py-2 text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full w-full">
-          Email Me for Business
+          Email Me
         </button>
       </div>
     </div>

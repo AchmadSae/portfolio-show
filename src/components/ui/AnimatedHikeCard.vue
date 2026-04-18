@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRight, Clock, Zap, Mountain } from 'lucide-vue-next'
+import { ArrowRight, Clock, Zap, Settings, Code } from 'lucide-vue-next'
 
 const props = defineProps({
   title: { type: String, default: 'Mountain Hike' },
@@ -11,13 +11,21 @@ const props = defineProps({
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070"
     ]
   },
-  stats: {
-    type: Array as () => { label: string, icon: any }[],
-    default: null
+  stack: {
+    type: String,
+    default: 'Nuxt 3.x, Tailwind Css, Vue.js, MySQL'
   },
   description: {
     type: String,
     default: "Hiking on a mountain blends physical challenge with natural beauty, offering sweeping views and a profound sense of accomplishment."
+  },
+  stack: {
+    type: String,
+    default: ''
+  },
+  contract: {
+    type: String,
+    default: ''
   },
   href: { type: String, default: '#' }
 })
@@ -55,10 +63,20 @@ const props = defineProps({
       </div>
 
       <div class="mb-4 mt-2 flex items-center space-x-4 text-sm text-muted-foreground">
-        <div v-if="!stats" class="flex items-center space-x-4">
+        <div v-if="!stats && !stack && !contract" class="flex items-center space-x-4">
           <div class="flex items-center space-x-1.5"><Clock class="h-4 w-4" /><span>~6 Hours</span></div>
-          <div class="flex items-center space-x-1.5"><Mountain class="h-4 w-4" /><span>8 km</span></div>
+          <div class="flex items-center space-x-1.5"><Settings class="h-4 w-4" /><span>8 km</span></div>
           <div class="flex items-center space-x-1.5"><Zap class="h-4 w-4" /><span>Medium</span></div>
+        </div>
+        <div v-else-if="stack || contract" class="flex flex-wrap gap-y-2 gap-x-4 items-center w-full">
+          <div v-if="contract" class="flex items-center space-x-1.5 text-primary">
+            <Clock class="h-4 w-4 shrink-0" />
+            <span class="font-medium">{{ contract }}</span>
+          </div>
+          <div v-if="stack" class="flex items-center space-x-1.5">
+            <Code class="h-4 w-4 shrink-0" />
+            <span class="text-xs sm:text-sm">{{ stack }}</span>
+          </div>
         </div>
         <div v-else v-for="(stat, index) in stats" :key="index" class="flex items-center space-x-1.5">
            <component :is="stat.icon" class="h-4 w-4" />
