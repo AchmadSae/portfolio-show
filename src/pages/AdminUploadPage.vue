@@ -64,7 +64,7 @@ const handleUpload = async () => {
       const fileName = `${Math.random()}.${fileExt}`
       const filePath = `article-images/${fileName}`
 
-      const { error: uploadError, data } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('porto_bucket') 
         .upload(filePath, imageFile)
 

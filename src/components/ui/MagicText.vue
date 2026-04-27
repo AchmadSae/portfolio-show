@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useWindowScroll, useElementBounding } from '@vueuse/core'
+import { useElementBounding } from '@vueuse/core'
 
 const props = defineProps({
   text: {
@@ -12,7 +12,7 @@ const props = defineProps({
 const words = computed(() => props.text.split(' '))
 
 const container = ref<HTMLElement | null>(null)
-const { y } = useWindowScroll()
+
 const { top } = useElementBounding(container)
 
 // Calculate progress from 0 to 1 as the element scrolls through the viewport window

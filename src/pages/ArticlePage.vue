@@ -118,15 +118,18 @@ const fetchArticle = async (id?: string) => {
   loading.value = true
   
   try {
-    let query = supabase.from('articles').select('*')
+    let data: any = null
+    let error: any = null
     
     if (id) {
-      query = query.eq('id', id).single()
+      const result = await supabase.from('articles').select('*').eq('id', id).single()
+      data = result.data
+      error = result.error
     } else {
-      query = query.order('created_at', { ascending: false }).limit(1).single()
+      const result = await supabase.from('articles').select('*').order('created_at', { ascending: false }).limit(1).single()
+      data = result.data
+      error = result.error
     }
-    
-    const { data, error } = await query
       
     if (data && !error) {
       article.value = data

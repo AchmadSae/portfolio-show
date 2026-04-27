@@ -19,9 +19,9 @@ const props = defineProps({
     type: String,
     default: "Hiking on a mountain blends physical challenge with natural beauty, offering sweeping views and a profound sense of accomplishment."
   },
-  stack: {
-    type: String,
-    default: ''
+  stats: {
+    type: Array as () => { icon: any, label: string }[],
+    default: undefined
   },
   contract: {
     type: String,
