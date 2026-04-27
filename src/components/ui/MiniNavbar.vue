@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 
 const isOpen = ref(false)
 const headerShapeClass = ref('rounded-full')
@@ -20,22 +20,54 @@ watch(isOpen, (newVal) => {
   }
 })
 
+const activeSection = ref(window.location.hash || '#/')
+
+const checkActiveSection = () => {
+  const hash = window.location.hash || '#/'
+  if (hash.startsWith('#/') && hash !== '#/') {
+    activeSection.value = hash
+    return
+  }
+
+  const sections = ['#portfolio', '#works']
+  let current = '#/'
+  for (const s of sections) {
+    const el = document.querySelector(s)
+    if (el) {
+      const rect = el.getBoundingClientRect()
+      if (rect.top <= window.innerHeight * 0.3) {
+        current = s
+        break
+      }
+    }
+  }
+  activeSection.value = current
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', checkActiveSection, { passive: true })
+  window.addEventListener('hashchange', checkActiveSection)
+  checkActiveSection()
+})
+
 onUnmounted(() => {
   if (shapeTimeout) clearTimeout(shapeTimeout)
+  window.removeEventListener('scroll', checkActiveSection)
+  window.removeEventListener('hashchange', checkActiveSection)
 })
 
 const navLinksData = [
-  { label: 'Home', href: '#' },
-  { label: 'Works', href: '#works' },
-  { label: 'Portfolio', href: '#portfolio' },
+  { label: 'Home', href: '#/' },
+  { label: 'Article', href: '#/article' }
 ]
 
 const handleNavClick = (e: Event, href: string) => {
   if (href.startsWith('#')) {
-    e.preventDefault()
-    if (href === '#') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+    if (href.startsWith('#/')) {
+      // It's a route
+      window.location.hash = href
     } else {
+      e.preventDefault()
       const element = document.querySelector(href)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
@@ -69,19 +101,19 @@ const handleNavClick = (e: Event, href: string) => {
           @click="(e) => handleNavClick(e, link.href)"
           class="group relative inline-block overflow-hidden h-5 flex items-center text-sm"
         >
-          <div class="flex flex-col transition-transform duration-300 ease-out transform group-hover:-translate-y-1/2">
-            <span class="text-gray-400 font-medium">{{ link.label }}</span>
+          <div :class="['flex flex-col transition-transform duration-300 ease-out transform group-hover:-translate-y-1/2', activeSection === link.href ? '-translate-y-1/2' : '']">
+            <span :class="['font-medium', activeSection === link.href ? 'text-white' : 'text-gray-400']">{{ link.label }}</span>
             <span class="text-white font-medium">{{ link.label }}</span>
           </div>
         </a>
       </nav>
 
-      <div class="hidden sm:flex items-center gap-2 sm:gap-3">
+      <div class="hidden sm:flex items-center gap-2 sm:gap-3 sm:ml-12">
         <div class="relative group w-full sm:w-auto">
           <div class="absolute inset-0 -m-2 rounded-full hidden sm:block bg-gray-100 opacity-40 filter blur-lg pointer-events-none transition-all duration-300 ease-out group-hover:opacity-60 group-hover:blur-xl group-hover:-m-3"></div>
-          <button class="relative z-10 px-4 py-1.5 sm:px-3 text-xs sm:text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full hover:from-gray-200 hover:to-gray-400 transition-all duration-200 w-full sm:w-auto">
+          <a href="mailto:achmad.saepudin21@gmail.com?subject=Interested%20in%20Product" class="relative z-10 px-4 py-1.5 sm:px-3 text-xs sm:text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full hover:from-gray-200 hover:to-gray-400 transition-all duration-200 w-full sm:w-auto inline-block text-center">
            Email Me
-          </button>
+          </a>
         </div>
       </div>
 
@@ -93,14 +125,20 @@ const handleNavClick = (e: Event, href: string) => {
 
     <div :class="`sm:hidden flex flex-col items-center w-full transition-all ease-in-out duration-300 overflow-hidden ${isOpen ? 'max-h-[1000px] opacity-100 pt-4' : 'max-h-0 opacity-0 pt-0 pointer-events-none'}`">
       <nav class="flex flex-col items-center space-y-4 text-base w-full">
-        <a v-for="link in navLinksData" :key="link.href" :href="link.href" @click="(e) => handleNavClick(e, link.href)" class="text-gray-300 hover:text-white transition-colors w-full text-center">
+        <a 
+          v-for="link in navLinksData" 
+          :key="link.href" 
+          :href="link.href" 
+          @click="(e) => handleNavClick(e, link.href)" 
+          :class="['transition-colors w-full text-center', activeSection === link.href ? 'text-white font-bold' : 'text-gray-300 hover:text-white']"
+        >
           {{ link.label }}
         </a>
       </nav>
-      <div class="flex flex-col items-center space-y-4 mt-6 w-full">
-        <button class="px-4 py-2 text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full w-full">
+      <div class="flex flex-col items-center space-y-4 mt-12 w-full">
+        <a href="mailto:achmad.saepudin21@gmail.com?subject=Interested%20in%20Product" class="px-4 py-2 text-sm font-semibold text-black bg-gradient-to-br from-gray-100 to-gray-300 rounded-full w-full text-center">
           Email Me
-        </button>
+        </a>
       </div>
     </div>
   </header>

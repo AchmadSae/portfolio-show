@@ -9,6 +9,18 @@ import FooterSection from './components/ui/FooterSection.vue'
 import OrbitingSkills from './components/ui/OrbitingSkills.vue'
 
 import MagicText from './components/ui/MagicText.vue'
+import ArticlePage from './pages/ArticlePage.vue'
+import AdminUploadPage from './pages/AdminUploadPage.vue'
+
+// Basic Hash Routing
+const currentRoute = ref(window.location.hash || '#/')
+
+onMounted(() => {
+  window.addEventListener('hashchange', () => {
+    currentRoute.value = window.location.hash
+  })
+})
+
 
 // Custom Cursor Animation
 const cursorX = ref(0)
@@ -40,7 +52,31 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative min-h-screen bg-background font-sans overflow-x-hidden selection:bg-white selection:text-black cursor-none custom-cursor-wrapper">
+  <div v-if="currentRoute === '#/article'" class="relative min-h-screen bg-background font-sans overflow-x-hidden selection:bg-white selection:text-black cursor-none custom-cursor-wrapper">
+    <!-- Custom Cursor -->
+    <div 
+      class="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/40 pointer-events-none z-[100] transform -translate-x-1/2 -translate-y-1/2 transition-transform ease-out duration-75 mix-blend-difference hidden md:block" 
+      :style="{ left: `${dotX}px`, top: `${dotY}px` }"
+    ></div>
+    <div 
+      class="fixed top-0 left-0 w-2 h-2 rounded-full bg-white pointer-events-none z-[100] transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block" 
+      :style="{ left: `${cursorX}px`, top: `${cursorY}px` }"
+    ></div>
+    <ArticlePage />
+  </div>
+  <div v-else-if="currentRoute === '#/admin'" class="relative min-h-screen bg-background font-sans overflow-x-hidden selection:bg-white selection:text-black cursor-none custom-cursor-wrapper">
+    <!-- Custom Cursor -->
+    <div 
+      class="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/40 pointer-events-none z-[100] transform -translate-x-1/2 -translate-y-1/2 transition-transform ease-out duration-75 mix-blend-difference hidden md:block" 
+      :style="{ left: `${dotX}px`, top: `${dotY}px` }"
+    ></div>
+    <div 
+      class="fixed top-0 left-0 w-2 h-2 rounded-full bg-white pointer-events-none z-[100] transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:block" 
+      :style="{ left: `${cursorX}px`, top: `${cursorY}px` }"
+    ></div>
+    <AdminUploadPage />
+  </div>
+  <div v-else class="relative min-h-screen bg-background font-sans overflow-x-hidden selection:bg-white selection:text-black cursor-none custom-cursor-wrapper">
     <!-- Custom Cursor -->
     <div 
       class="fixed top-0 left-0 w-8 h-8 rounded-full border border-white/40 pointer-events-none z-[100] transform -translate-x-1/2 -translate-y-1/2 transition-transform ease-out duration-75 mix-blend-difference hidden md:block" 
